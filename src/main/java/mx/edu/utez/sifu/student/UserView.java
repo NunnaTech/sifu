@@ -1,4 +1,4 @@
-package mx.edu.utez.sifu.user;
+package mx.edu.utez.sifu.student;
 
 
 public class UserView {

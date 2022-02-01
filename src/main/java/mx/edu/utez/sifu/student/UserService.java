@@ -1,4 +1,4 @@
-package mx.edu.utez.sifu.user;
+package mx.edu.utez.sifu.student;
 
 import java.util.List;
 import java.util.Map;
@@ -14,37 +14,37 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> getAll() {
-        return (List<User>) userRepository.findAll();
+    public List<Student> getAll() {
+        return (List<Student>) userRepository.findAll();
     }
 
-    public Optional<User> getById(int id) {
+    public Optional<Student> getById(int id) {
         return userRepository.findById(id);
     }
 
-    public User save(User entity) {
+    public Student save(Student entity) {
         return userRepository.save(entity);
     }
 
-    public Optional<User> update(User entity) {
-        Optional<User> updatedEntity = Optional.empty();
+    public Optional<Student> update(Student entity) {
+        Optional<Student> updatedEntity = Optional.empty();
         updatedEntity = userRepository.findById(entity.getId());
         if (!updatedEntity.isEmpty())
             userRepository.save(entity);
         return updatedEntity;
     }
 
-    public Optional<User> partialUpdate(Integer id, Map<Object, Object> fields) {
+    public Optional<Student> partialUpdate(Integer id, Map<Object, Object> fields) {
         try {
-            User entity = getById(id).get();
+            Student entity = getById(id).get();
             if (entity == null) {
                 return Optional.empty();
             }
-            Optional<User> updatedEntity = Optional.empty();
+            Optional<Student> updatedEntity = Optional.empty();
             // Map key is field name, v is value
             fields.forEach((updatedField, value) -> {
                 // use reflection to get fields updatedField on manager and set it to value updatedField
-                Field field = ReflectionUtils.findField(User.class, (String) updatedField);
+                Field field = ReflectionUtils.findField(Student.class, (String) updatedField);
                 field.setAccessible(true);
                 ReflectionUtils.setField(field, entity, value);
             });
@@ -57,8 +57,8 @@ public class UserService {
         }
     }
 
-    public Optional<User> delete(int id) {
-        Optional<User> entity = getById(id);
+    public Optional<Student> delete(int id) {
+        Optional<Student> entity = getById(id);
         if(entity.isPresent()){
             userRepository.delete(entity.get());
         }

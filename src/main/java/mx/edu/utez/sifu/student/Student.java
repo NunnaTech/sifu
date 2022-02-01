@@ -1,6 +1,5 @@
-package mx.edu.utez.sifu.user;
+package mx.edu.utez.sifu.student;
 
-import javax.persistence.Entity;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -19,9 +19,9 @@ import lombok.Data;
 
 
 @Entity
-@Table(name="troncal")
+@Table(name="students")
 @Data
-public class User implements Serializable{
+public class Student implements Serializable{
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -29,7 +29,7 @@ public class User implements Serializable{
     private Integer id;
 
     @NotNull
-	@Size(min=2, max=50)
+	@Size(max=50)
     @Column(name = "name", nullable = false, columnDefinition = "varchar(50)")
     private String name;
     
@@ -56,6 +56,7 @@ public class User implements Serializable{
     private String gender;
 
     @NotNull
+	@Size(min=18)
     @Column(nullable = false, columnDefinition = "varchar(20)")
     private String curp;
 
@@ -83,8 +84,8 @@ public class User implements Serializable{
     @Column(nullable = false, columnDefinition = "varchar(10)")
     private String zip_code;
     
-
     @NotNull
+    @Email
     @Column(columnDefinition = "varchar(100)")
     private String email;
 

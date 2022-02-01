@@ -7,7 +7,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +18,7 @@ import lombok.Data;
 
 
 @Entity
-@Table(name="troncal")
+@Table(name="students")
 @Data
 public class User implements Serializable{
 
@@ -82,7 +81,6 @@ public class User implements Serializable{
     @NotNull
     @Column(nullable = false, columnDefinition = "varchar(10)")
     private String zip_code;
-    
 
     @NotNull
     @Column(columnDefinition = "varchar(100)")
@@ -110,4 +108,6 @@ public class User implements Serializable{
     @UpdateTimestamp
     @Column(name = "modified_at")
     private LocalDateTime modifiedAt;
+
+
 }

@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class UserService {
-
+/*
     @Autowired
     private UserRepository userRepository;
 
@@ -63,5 +63,5 @@ public class UserService {
             userRepository.delete(entity.get());
         }
         return entity;
-    }
+    }*/
 }

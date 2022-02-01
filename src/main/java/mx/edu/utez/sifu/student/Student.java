@@ -1,17 +1,14 @@
-package mx.edu.utez.sifu.user;
+package mx.edu.utez.sifu.student;
 
-import javax.persistence.Entity;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Data;
@@ -20,7 +17,7 @@ import lombok.Data;
 @Entity
 @Table(name="students")
 @Data
-public class User implements Serializable{
+public class Student implements Serializable{
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -28,11 +25,13 @@ public class User implements Serializable{
     private Integer id;
 
     @NotNull
-	@Size(min=2, max=50)
+    @NotBlank
+	@Size(max=50)
     @Column(name = "name", nullable = false, columnDefinition = "varchar(50)")
     private String name;
     
     @NotNull
+    @NotBlank
 	@Size(min=2, max=50)
     @Column(name = "first_name", nullable = false, columnDefinition = "varchar(50)")
     private String firstName;
@@ -55,6 +54,7 @@ public class User implements Serializable{
     private String gender;
 
     @NotNull
+	@Size(min=18)
     @Column(nullable = false, columnDefinition = "varchar(20)")
     private String curp;
 
@@ -71,10 +71,12 @@ public class User implements Serializable{
     private Boolean children;
 
     @NotNull
+    @NotBlank
     @Column(nullable = false, columnDefinition = "varchar(100)")
     private String address;
 
     @NotNull
+    @NotBlank
     @Column(nullable = false, columnDefinition = "varchar(70)")
     private String city;
 
@@ -83,13 +85,17 @@ public class User implements Serializable{
     private String zip_code;
 
     @NotNull
+    @NotBlank
+    @Email
     @Column(columnDefinition = "varchar(100)")
     private String email;
 
     @NotNull
+    @NotBlank
     @Column(columnDefinition = "varchar(100)")
     private String phone;
 
+    @NotBlank
     @Column(columnDefinition = "double(10,2)")
     private Double salary;
 
@@ -100,6 +106,10 @@ public class User implements Serializable{
     private Boolean isTemporal;
 
     @NotNull
+    @NotBlank
+    private String career;
+
+    @NotNull
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -108,6 +118,4 @@ public class User implements Serializable{
     @UpdateTimestamp
     @Column(name = "modified_at")
     private LocalDateTime modifiedAt;
-
-
 }

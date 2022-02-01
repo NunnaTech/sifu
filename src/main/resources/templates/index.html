@@ -18,7 +18,7 @@
 
     <div class="ui vertical stripe segment main-container">
         <div class="ui text container">
-            <form class="ui form" th:action="@{/}" method="get" th:object="${user}">
+            <form class="ui form" th:action="@{/save}" method="post" th:object="${student}">
                 <h4 class="ui dividing header">Información Personal</h4>
                 <div class="three fields">
                     <!-- -------------------------- -->
@@ -190,14 +190,14 @@
                             <div class="inline fields">
                                 <div class="field">
                                     <div class="ui radio checkbox">
-                                        <input type="radio" id="isWorkingBtnTrue" name="isWorking"
+                                        <input type="radio" id="isWorkingBtnTrue" value="true" name="isWorking"
                                                th:checked="${isWorking} ? 'checked'">
                                         <label>Sí</label>
                                     </div>
                                 </div>
                                 <div class="field">
                                     <div class="ui radio checkbox">
-                                        <input type="radio" id="isWorkingBtnFalse" name="isWorking"
+                                        <input type="radio" id="isWorkingBtnFalse" value="false" name="isWorking"
                                                th:checked="${isWorking} ? '':'checked'">
                                         <label>No</label>
                                     </div>
@@ -212,14 +212,14 @@
                             <div class="inline fields">
                                 <div class="field">
                                     <div class="ui radio checkbox">
-                                        <input type="radio" name="isTemporal" th:checked="${isTemporal} ? 'checked'"
+                                        <input type="radio" name="isTemporal" value="false" th:checked="${isTemporal} ? 'checked'"
                                                checked>
                                         <label>Estable</label>
                                     </div>
                                 </div>
                                 <div class="field">
                                     <div class="ui radio checkbox">
-                                        <input type="radio" name="isTemporal" th:checked="${isTemporal} ? '':'checked'">
+                                        <input type="radio" name="isTemporal" value="true" th:checked="${isTemporal} ? '':'checked'">
                                         <label>Temporal</label>
                                     </div>
                                 </div>

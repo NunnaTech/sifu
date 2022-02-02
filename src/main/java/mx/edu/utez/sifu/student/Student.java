@@ -37,8 +37,8 @@ public class Student implements Serializable{
     private String firstName;
 
 	@Size(min=2, max=50)
-    @Column(name = "last_name", columnDefinition = "varchar(50)")
-    private String lastName;
+    @Column(name = "second_name", columnDefinition = "varchar(50)")
+    private String secondName;
 
     @NotNull
     @Column(columnDefinition = "timestamp(6)")

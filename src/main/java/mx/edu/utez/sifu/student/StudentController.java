@@ -38,10 +38,9 @@ public class StudentController {
     public String guardar(@Valid Student student, BindingResult result) {
         log.info(student.toString());
         if (result.hasErrors()) {
-            return "";
+            return "index";
         }
-        //userService.save(student);
-
-        return "redirect:" + "";
+        studentService.save(student);
+        return "redirect:/view";
     }
 }

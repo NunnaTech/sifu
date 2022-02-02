@@ -4,6 +4,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDateTime;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -12,7 +13,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Data;
-
 
 @Entity
 @Table(name="students")
@@ -26,7 +26,7 @@ public class Student implements Serializable{
 
     @NotNull
     @NotBlank
-	@Size(max=50)
+	@Size(min=2,max=50)
     @Column(name = "name", nullable = false, columnDefinition = "varchar(50)")
     private String name;
     
@@ -40,9 +40,10 @@ public class Student implements Serializable{
     @Column(name = "second_name", columnDefinition = "varchar(50)")
     private String secondName;
 
+    @NotBlank
     @NotNull
-    @Column(columnDefinition = "timestamp(6)")
-    private LocalDateTime birthday;
+
+    private String birthday;
     
     @NotNull
 	@Min(18)
@@ -50,19 +51,23 @@ public class Student implements Serializable{
     private Integer age;
 
     @NotNull
+    @NotBlank
     @Column(nullable = false, columnDefinition = "varchar(50)")
     private String gender;
 
     @NotNull
-	@Size(min=18)
+    @NotBlank
+	@Size(min=18,max=18)
     @Column(nullable = false, columnDefinition = "varchar(20)")
     private String curp;
 
     @NotNull
+    @NotBlank
     @Column(nullable = false)
     private String region;
 
     @NotNull
+    @NotBlank
     @Column(name="marital_status", nullable = false, columnDefinition = "varchar(50)")
     private String maritalStatus;
 
@@ -81,6 +86,7 @@ public class Student implements Serializable{
     private String city;
 
     @NotNull
+    @Size(min=5, max = 5)
     @Column(nullable = false, columnDefinition = "varchar(10)")
     private String zip_code;
 
@@ -92,10 +98,10 @@ public class Student implements Serializable{
 
     @NotNull
     @NotBlank
+    @Size(min = 10, max = 10)
     @Column(columnDefinition = "varchar(100)")
     private String phone;
 
-    @NotBlank
     @Column(columnDefinition = "double(10,2)")
     private Double salary;
 
@@ -109,12 +115,10 @@ public class Student implements Serializable{
     @NotBlank
     private String career;
 
-    @NotNull
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @NotNull
     @UpdateTimestamp
     @Column(name = "modified_at")
     private LocalDateTime modifiedAt;

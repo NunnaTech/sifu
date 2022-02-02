@@ -16,8 +16,26 @@
 
     <header th:replace="fragments :: header"/>
 
-    <div class="ui vertical stripe segment main-container">
-        <div class="ui text container">
+    <div class="ui container">
+        <div class="ui two steps">
+            <div class="step active">
+                <div class="content">
+                    <div class="title">Registro de Ficha</div>
+                    <div class="description">Por favor, llena los siguientes campos.</div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="content">
+                    <div class="title">Listado de Fichas</div>
+                    <div class="description">Una vez completado los datos, se mostraran los registros.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="ui vertical segment" style="margin-bottom: 3em; padding-bottom: 3em" >
+        <div class="ui text container ">
             <form class="ui form" th:action="@{/save}" method="post" th:object="${student}">
                 <h4 class="ui dividing header">Información Personal</h4>
                 <div class="three fields">
@@ -250,7 +268,7 @@
                     </div>
                 </div>
                 <div class="field">
-                    <button class="ui primary button huge fluid floated" style="margin-top: 4em">
+                    <button class="ui primary button big fluid floated" style="margin-top: 2em">
                         Envíar
                     </button>
                 </div>

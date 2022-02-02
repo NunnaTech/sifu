@@ -3,7 +3,7 @@ body{
 }
 
 .hidden.menu {
-    display: none;
+    display: block;
 }
 
 .masthead.segment {
@@ -44,7 +44,7 @@ body{
 .ui.vertical.stripe .button + h3,
 .ui.vertical.stripe p + h3 {
     margin-top: 1em;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 
 }
 
@@ -66,7 +66,7 @@ body{
 
 .quote.stripe.segment .grid .column {
     padding-top: 5em;
-    padding-bottom: 5em;
+    padding-bottom: 1em;
 }
 
 .footer.segment {
@@ -108,6 +108,7 @@ body{
 a.text-white{
     color: #FFFFFF;
 }
+
 
 
 

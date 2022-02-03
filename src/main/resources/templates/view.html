@@ -68,7 +68,7 @@
                 <td th:text="${student.firstName}"/>
                 <td th:text="${student.secondName}"/>
                 <td th:text="${student.curp}"/>
-                <td th:text="${student.birthday}"/>
+                <td th:text="${student.birthday.split(' ')[0]}"/>
                 <td>
                     <form th:action="@{/delete/{id}(id=${student.id})}" onsubmit="event.preventDefault(); return deleteRow(event)" method="post" th:id="${student.id}">
                         <input class="ui inverted red button" type="submit" value="Eliminar"  />

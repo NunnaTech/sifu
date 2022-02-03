@@ -57,6 +57,7 @@ public class Student implements Serializable {
     @NotNull
     @NotBlank
     @Size(min = 18, max = 18)
+    @Pattern(regexp = "[A-Za-z0-9]*")
     @Column(nullable = false, columnDefinition = "varchar(20)")
     private String curp;
 
@@ -81,6 +82,7 @@ public class Student implements Serializable {
 
     @NotNull
     @NotBlank
+    @Pattern(regexp = "[A-Za-zÀ-ÿ '-.]*")
     @Column(nullable = false, columnDefinition = "varchar(70)")
     private String city;
 

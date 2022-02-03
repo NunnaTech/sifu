@@ -188,7 +188,7 @@
                         <div th:classappend="${#fields.hasErrors('email')? 'field error' :''}">
                             <label>Correo Electrónico</label>
                             <input type="email" id="email" name="email" required maxlength="100" th:field="*{email}"
-                                   placeholder="Ej: Centro">
+                                   placeholder="Ej: luis@mail.com">
                             <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
                         </div>
                     </div>

@@ -23,7 +23,12 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping("/")
-    public String index(Model model, Student student) {
+    public String index() {
+        return "redirect:/registro";
+    }
+
+    @GetMapping("/registro")
+    public String registro(Model model, Student student) {
         return "index";
     }
 
@@ -38,7 +43,7 @@ public class StudentController {
     public String guardar(@Valid Student student, BindingResult result) {
         log.info(student.toString());
         if (result.hasErrors()) {
-            return "";
+            return "registro";
         }
         //userService.save(student);
 

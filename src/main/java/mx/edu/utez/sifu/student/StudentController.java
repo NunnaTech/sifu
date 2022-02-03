@@ -19,7 +19,7 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public String registro(Model model, Student student) {
         return "index";
     }
@@ -34,7 +34,7 @@ public class StudentController {
     @PostMapping("/save")
     public String guardar(@Valid Student student, BindingResult result) {
         if (result.hasErrors()) {
-            return "registro";
+            return "/";
         }
         studentService.save(student);
         return "redirect:/view";

@@ -1,0 +1,1 @@
+web: java -jar -Dspring.profiles.active=pdn build/libs/sifu-0.1.0.jar

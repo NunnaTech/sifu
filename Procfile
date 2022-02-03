@@ -1,1 +1,1 @@
-web: java -jar -Dspring.profiles.active=pdn -Dserver.port=$PORT target/sifu-0.1.0.jar
+web: java -jar -Dspring.profiles.active=pdn -Dserver.port=$PORT target/sifu-1.0.jar

@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>mx.edu.utez</groupId>
 	<artifactId>sifu</artifactId>
-	<version>0.1.0</version>
+	<version>1.0</version>
 	<name>sifu</name>
 	<description>A simple project to show the way to validate the input data</description>
 	<properties>

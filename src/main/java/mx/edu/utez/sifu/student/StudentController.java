@@ -30,13 +30,12 @@ public class StudentController {
     @GetMapping("/view")
     public String view(Model model) {
         List<Student> students = studentService.getAll();
-        model.addAttribute("students",students);
+        model.addAttribute("students", students);
         return "view";
     }
 
     @PostMapping("/save")
     public String guardar(@Valid Student student, BindingResult result) {
-        log.info(student.toString());
         if (result.hasErrors()) {
             return "index";
         }

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 
 @Controller
 @RequestMapping("/")
@@ -21,11 +20,6 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping("/")
-    public String index() {
-        return "redirect:/registro";
-    }
-
-    @GetMapping("/registro")
     public String registro(Model model, Student student) {
         return "index";
     }

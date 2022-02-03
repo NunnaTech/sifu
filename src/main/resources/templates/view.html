@@ -70,9 +70,9 @@
                 <td th:text="${student.curp}"/>
                 <td th:text="${student.birthday}"/>
                 <td>
-                    <button class="ui inverted red button">
-                        Eliminar
-                    </button>
+                    <form th:action="@{/delete/{id}(id=${student.id})}" onsubmit="event.preventDefault(); return deleteRow(event)" method="post" th:id="${student.id}">
+                        <input class="ui inverted red button" type="submit" value="Eliminar"  />
+                    </form>
                 </td>
             </tr>
             </tbody>

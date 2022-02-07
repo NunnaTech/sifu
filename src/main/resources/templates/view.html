@@ -15,8 +15,11 @@
     <title>SIFU</title>
     <link rel="stylesheet" th:href="@{/css/semantic.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/39/39554.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"/>
+
 </head>
-<body>
+<body style="background: #f3f5f9">
 <header th:replace="fragments :: header"/>
 <div class="ui container">
     <div class="ui two steps">
@@ -58,7 +61,7 @@
             <th class="ui left aligned top attached info message">
                 Fecha de Nacimiento
             </th>
-            <th class="ui left aligned top attached info message">
+            <th class="ui center aligned top attached info message">
                 Acciones
             </th>
             </thead>
@@ -69,9 +72,11 @@
                 <td th:text="${student.secondName}"/>
                 <td th:text="${student.curp}"/>
                 <td th:text="${student.birthday.split(' ')[0]}"/>
-                <td>
+                <td class="center aligned">
                     <form th:action="@{/delete/{id}(id=${student.id})}" onsubmit="event.preventDefault(); return deleteRow(event)" method="post" th:id="${student.id}">
-                        <input class="ui inverted red button" type="submit" value="Eliminar"  />
+                        <button class="ui icon red button" type="submit" style="padding: 1em">
+                            <i class="trash icon white"></i>
+                        </button>
                     </form>
                 </td>
             </tr>

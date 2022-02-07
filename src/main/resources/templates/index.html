@@ -9,12 +9,17 @@
     <title>SIFU</title>
     <link rel="stylesheet" th:href="@{/css/semantic.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"/>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/39/39554.png">
+
+
 </head>
-<body>
+<body style="background: #f3f5f9">
 
 <div class="pusher">
 
     <header th:replace="fragments :: header"/>
+
 
     <div class="ui container">
         <div class="ui two steps">
@@ -37,14 +42,17 @@
     <div class="ui vertical segment" style="margin-bottom: 3em; padding-bottom: 3em">
         <div class="ui text container ">
             <form class="ui form" th:action="@{/save}" method="post" th:object="${student}">
-                <h4 class="ui dividing header">Información Personal</h4>
+                <h3 class="ui dividing header">Información Personal</h3>
                 <div class="three fields">
                     <!-- -------------------------- -->
                     <div class="field">
                         <div th:classappend="${#fields.hasErrors('name')? 'field error' :''}">
                             <label>Nombre(s)</label>
-                            <input type="text" name="name" minlength="2" maxlength="50" required th:field="*{name}"
-                                   id="name" placeholder="Ej: Luis Enrique">
+                            <div class="ui right icon input">
+                                <input type="text" name="name" minlength="2" maxlength="50" required th:field="*{name}"
+                                       id="name" placeholder="Ej: Luis Enrique">
+                                <i class="user icon"></i>
+                            </div>
                             <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                         </div>
                     </div>
@@ -52,9 +60,12 @@
                     <div class="field">
                         <div th:classappend="${#fields.hasErrors('firstName')? 'field error' :''}">
                             <label>Primer Apellido</label>
-                            <input type="text" name="firstName" id="firstName" th:field="*{firstName}" minlength="2"
-                                   maxlength="50" required
-                                   placeholder="Ej: Álvarez">
+                            <div class="ui right icon input">
+                                <input type="text" name="firstName" id="firstName" th:field="*{firstName}" minlength="2"
+                                       maxlength="50" requireds
+                                       placeholder="Ej: Álvarez">
+                                <i class="user icon"></i>
+                            </div>
                             <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
                         </div>
                     </div>
@@ -62,9 +73,12 @@
                     <div class="field">
                         <div th:classappend="${#fields.hasErrors('secondName')? 'field error' :''}">
                             <label>Segundo Apellido</label>
-                            <input type="text" name="secondName" id="secondName" placeholder="Ej: Ortiz"
-                                   minlength="0" maxlength="50"
-                                   th:field="*{secondName}">
+                            <div class="ui right icon input">
+                                <input type="text" name="secondName" id="secondName" placeholder="Ej: Ortiz"
+                                       minlength="0" maxlength="50"
+                                       th:field="*{secondName}">
+                                <i class="user icon"></i>
+                            </div>
                             <span th:if="${#fields.hasErrors('secondName')}" th:errors="*{secondName}"></span>
                         </div>
                     </div>
@@ -74,9 +88,12 @@
                     <div class="field">
                         <div th:classappend="${#fields.hasErrors('curp')? 'field error' :''}">
                             <label>CURP</label>
-                            <input type="text" name="curp" id="curp" th:field="*{curp}"
-                                   minlength="18" maxlength="18" required
-                                   placeholder="Ej: GOPY240793MMRRSR05">
+                            <div class="ui right icon input">
+                                <input type="text" name="curp" id="curp" th:field="*{curp}"
+                                       minlength="18" maxlength="18" required
+                                       placeholder="Ej:GOPY240793MMRRSR05">
+                                <i class="id card icon"></i>
+                            </div>
                             <span th:if="${#fields.hasErrors('curp')}" th:errors="*{curp}"></span>
                         </div>
                     </div>
@@ -84,9 +101,9 @@
                     <div class="field">
                         <div th:classappend="${#fields.hasErrors('birthday')? 'field error' :''}">
                             <label>Fecha de Nacimiento</label>
-                            <input type="date" id="birthday" name="birthday" th:field="*{birthday}" max="2003-12-31"
-                                   required
-                                   placeholder="Date/Time">
+                                <input type="date" id="birthday" name="birthday" th:field="*{birthday}" max="2003-12-31"
+                                       required
+                                       placeholder="Date/Time">
                             <span th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></span>
                         </div>
                     </div>
@@ -94,8 +111,11 @@
                     <div class="field">
                         <div th:classappend="${#fields.hasErrors('age')? 'field error' :''}">
                             <label>Edad</label>
-                            <input type="number" name="age" id="age" th:field="*{age}" placeholder="Ej: 18" min="18"
-                                   max="100" required>
+                            <div class="ui right icon input">
+                                <input type="number" name="age" id="age" th:field="*{age}" placeholder="Ej: 18" min="18"
+                                       max="100" required>
+                                <i class="birthday cake icon"></i>
+                            </div>
                             <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
                         </div>
                     </div>
@@ -113,6 +133,8 @@
                             <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
                         </div>
                     </div>
+
+
                     <!-- -------------------------- -->
                     <div class="field">
                         <div th:classappend="${#fields.hasErrors('region')? 'field error' :''}">
@@ -156,8 +178,12 @@
                 <div class="field">
                     <div th:classappend="${#fields.hasErrors('address')? 'field error' :''}">
                         <label>Domilicio</label>
-                        <input type="text" id="address" name="address" required maxlength="100" th:field="*{address}"
-                               placeholder="Ej: Justo Cierra">
+                        <div class="ui right icon input">
+                            <input type="text" id="address" name="address" required maxlength="100"
+                                   th:field="*{address}"
+                                   placeholder="Ej: Justo Cierra">
+                            <i class="building icon"></i>
+                        </div>
                         <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
                     </div>
                 </div>
@@ -166,8 +192,11 @@
                     <div class="field">
                         <div th:classappend="${#fields.hasErrors('city')? 'field error' :''}">
                             <label>Ciudad</label>
-                            <input type="text" id="city" name="city" required maxlength="70" th:field="*{city}"
-                                   placeholder="Ej: Centro">
+                            <div class="ui right icon input">
+                                <input type="text" id="city" name="city" required maxlength="70" th:field="*{city}"
+                                       placeholder="Ej: Centro">
+                                <i class="home icon"></i>
+                            </div>
                             <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
                         </div>
                     </div>
@@ -175,9 +204,12 @@
                     <div class="field">
                         <div th:classappend="${#fields.hasErrors('zip_code')? 'field error' :''}">
                             <label>Código Postal</label>
-                            <input type="text" id="zip_code" name="zip_code" required minlength="5" maxlength="5"
-                                   th:field="*{zip_code}"
-                                   placeholder="Ej: 62577">
+                            <div class="ui right icon input">
+                                <input type="text" id="zip_code" name="zip_code" required minlength="5" maxlength="5"
+                                       th:field="*{zip_code}"
+                                       placeholder="Ej: 62577">
+                                <i class="home icon"></i>
+                            </div>
                             <span th:if="${#fields.hasErrors('zip_code')}" th:errors="*{zip_code}"></span>
                         </div>
                     </div>
@@ -187,8 +219,11 @@
                     <div class="field">
                         <div th:classappend="${#fields.hasErrors('email')? 'field error' :''}">
                             <label>Correo Electrónico</label>
-                            <input type="email" id="email" name="email" required maxlength="100" th:field="*{email}"
-                                   placeholder="Ej: luis@mail.com">
+                            <div class="ui right icon input">
+                                <input type="email" id="email" name="email" required maxlength="100" th:field="*{email}"
+                                       placeholder="Ej: luis@mail.com">
+                                <i class="envelope icon"></i>
+                            </div>
                             <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
                         </div>
                     </div>
@@ -196,8 +231,11 @@
                     <div class="field">
                         <div th:classappend="${#fields.hasErrors('phone')? 'field error' :''}">
                             <label>Teléfono</label>
-                            <input type="tel" id="phone" name="phone" maxlength="10" minlength="10" required
-                                   th:field="*{phone}" placeholder="Ej: 7773658525">
+                            <div class="ui right icon input">
+                                <input type="tel" id="phone" name="phone" maxlength="10" minlength="10" required
+                                       th:field="*{phone}" placeholder="Ej: 7773658525">
+                                <i class="phone icon"></i>
+                            </div>
                             <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
                         </div>
                     </div>
@@ -207,8 +245,13 @@
                     <div class="field">
                         <div th:classappend="${#fields.hasErrors('salary')? 'field error' :''}">
                             <label>Ingreso Mensual Familiar</label>
-                            <input type="number" step="any" required id="salary" min="0.1" max="99999.9" name="salary" th:field="*{salary}"
-                                   placeholder="Ej: 3000.50">
+                            <div class="ui right icon input">
+                                <input type="number" step="any" required id="salary" min="0.1" max="99999.9"
+                                       name="salary"
+                                       th:field="*{salary}"
+                                       placeholder="Ej: 3000.50">
+                                <i class="balance scale icon"></i>
+                            </div>
                             <span th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></span>
                         </div>
                     </div>
@@ -280,9 +323,12 @@
                     </div>
                 </div>
                 <div class="field">
-                    <input type="submit" class="ui primary button big fluid floated" style="margin-top: 2em"
-                           value="Enviar"/>
+                    <button type="submit" class="ui primary button big fluid floated" style="margin-top: 2em">
+                        Guardar
+                        <i class="right save icon"></i>
+                    </button>
                 </div>
+
             </form>
         </div>
     </div>
@@ -290,7 +336,6 @@
     <footer th:replace="fragments :: footer"/>
 
 </div>
-
 
 
 </body>

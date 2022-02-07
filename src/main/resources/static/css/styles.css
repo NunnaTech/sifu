@@ -1,6 +1,4 @@
-body{
-    background-color: #f3f5f9;
-}
+
 
 .hidden.menu {
     display: block;
@@ -109,6 +107,11 @@ a.text-white{
     color: #FFFFFF;
 }
 
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    margin-right: -8px;
+    text-decoration-color: #0d71bb;
+}
 
 
 

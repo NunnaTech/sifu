@@ -8,20 +8,23 @@
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/semantic.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+
 </head>
 <body>
-
 <header th:fragment="header">
-    <div class="ui menu">
-        <a class="button ui green small" th:href="@{/}">
+    <div class="ui menu" style="padding: 1em">
+        <a class="button ui green small" th:href="@{/}" style="margin-right: 1em; padding: 1.2em">
             Registro de Ficha
+            <i class="right user plus icon"></i>
         </a>
-        <a class="button ui linkedin small" th:href="@{/view}">
+        <a class="button ui linkedin small" th:href="@{/view}" style="margin-right: 1em; padding: 1.2em">
             Listado de Fichas
+            <i class="right folder open icon"></i>
         </a>
     </div>
 
-    <h1 class="ui center aligned icon header blue">
+    <h1 class="ui center aligned icon header blue" >
+        <i class="xing open icon"></i>
         Sistema de Inscripción de Ficha Universitaria (SIFU)
     </h1>
 </header>
@@ -29,7 +32,7 @@
 
 <footer th:fragment="footer">
     <div class="ui inverted vertical footer segment">
-        <div class="ui container">
+        <div class="ui container" style="margin-top: 1.5em">
             <div class="ui stackable inverted divided equal height stackable grid">
                 <div class="four wide column">
                     <h4 class="ui inverted header">Elaboró</h4>

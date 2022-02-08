@@ -69,7 +69,6 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 	</dependencies>
-	<!-- Pagination -->
 	<dependency>
     	<groupId>org.thymeleaf</groupId>
     	<artifactId>thymeleaf-spring5</artifactId>

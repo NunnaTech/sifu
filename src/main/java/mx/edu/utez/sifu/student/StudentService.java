@@ -1,5 +1,6 @@
 package mx.edu.utez.sifu.student;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -7,6 +8,10 @@ import java.lang.reflect.Field;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class StudentService {
@@ -17,6 +22,29 @@ public class StudentService {
     public List<Student> getAll() {
         return (List<Student>) userRepository.findAll();
     }
+
+    // Pagination
+    public Page<Student> findPaginated(Pageable pageable) {
+        List<Student> students = (List<Student>) userRepository.findAll();
+        
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Student> list;
+
+        if (students.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, students.size());
+            list = students.subList(startItem, toIndex);
+        }
+
+        Page<Student> studentPage
+          = new PageImpl<Student>(list, PageRequest.of(currentPage, pageSize), students.size());
+
+        return studentPage;
+    }
+
 
     public Optional<Student> getById(int id) {
         return userRepository.findById(id);

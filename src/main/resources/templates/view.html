@@ -50,6 +50,7 @@
 
         <table class="ui basic left aligned table">
             <thead>
+            <th class="ui center aligned top attached info message">#</th>
             <th class="ui left aligned top attached info message">Nombre(s)</th>
             <th class="ui left aligned top attached info message">
                 Primer Apellido
@@ -66,7 +67,11 @@
             </th>
             </thead>
             <tbody>
-            <tr th:each="student: ${students}">
+            <tr th:each="student, iStat : ${studentPage.content}"
+                th:style="${iStat.odd}? 'font-weight: bold;'"
+                th:alt-title="${iStat.even}? 'even' : 'odd'">
+
+                <td class="ui center aligned"th:text="${(iStat.index + 1)}"/>
                 <td th:text="${student.name}"/>
                 <td th:text="${student.firstName}"/>
                 <td th:text="${student.secondName}"/>
@@ -82,6 +87,14 @@
             </tr>
             </tbody>
         </table>
+        <div th:if="${studentPage.totalPages > 0}" class="ui pagination menu" style="display:flex; flex-wrap: wrap; justify-content: center;">
+            <a th:each="pageNumber : ${pageNumbers}"
+            th:href="@{/view(size=${studentPage.size}, page=${pageNumber})}"
+                th:text=${pageNumber}
+                class="item"
+                th:classappend="${pageNumber==studentPage.number + 1} ? 'active':''"
+                ></a>
+        </div>
     </div>
 </div>
 

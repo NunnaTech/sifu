@@ -67,6 +67,7 @@ public class StudentController {
 
     @PostMapping("/save")
     public String save(Model model,@Valid Student student, BindingResult result) {
+        model = fillSelects(model);
         if (result.hasErrors()) {
             return "index";
         }
@@ -82,7 +83,7 @@ public class StudentController {
             for (String field : fields) 
                 result.rejectValue(field, "messageCode", "Valor no válido");
 
-            model = fillSelects(model);
+
 
             return "index";
         }

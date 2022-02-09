@@ -19,6 +19,9 @@ public class StudentService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private StudentValidators validators;
+
     public List<Student> getAll() {
         return (List<Student>) userRepository.findAll();
     }
@@ -51,6 +54,20 @@ public class StudentService {
     }
 
     public Student save(Student entity) {
+        // check if the entity are fine 
+
+        // gender
+        entity.setGender(validators.gender(entity.getGender()));
+
+        // region
+        entity.setRegion(validators.Region(entity.getRegion()));
+
+        // marital Status
+        entity.setMaritalStatus(validators.maritalStatus(entity.getMaritalStatus()));
+
+        // Carrer
+        entity.setCareer(validators.career(entity.getCareer()));
+
         return userRepository.save(entity);
     }
 

@@ -127,8 +127,7 @@
                             <label>Género</label>
                             <select id="gender" name="gender" required th:field="*{gender}" class="ui dropdown">
                                 <option value="" selected>Selecione...</option>
-                                <option value="Masculino">Masculino</option>
-                                <option value="Femenino">Femenino</option>
+                                <option th:each="gender : ${genders}" th:value="${gender}" th:text="${gender}" />
                             </select>
                             <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
                         </div>
@@ -141,10 +140,7 @@
                             <label>País</label>
                             <select id="region" name="region" th:field="*{region}" class="ui dropdown" required>
                                 <option value="" selected>Selecione...</option>
-                                <option value="México">México</option>
-                                <option value="Estados Unidos">Estados Unidos</option>
-                                <option value="Canadá">Canadá</option>
-                                <option value="Guatemala">Guatemala</option>
+                                <option th:each="region : ${regions}" th:value="${region}" th:text="${region}" />
                             </select>
                             <span th:if="${#fields.hasErrors('region')}" th:errors="*{region}"></span>
                         </div>
@@ -156,11 +152,7 @@
                             <select id="maritalStatus" name="maritalStatus" th:field="*{maritalStatus}"
                                     class="ui dropdown" required>
                                 <option value="" selected>Selecione...</option>
-                                <option value="Soltero(a)">Soltero(a)</option>
-                                <option value="Casado(a)">Casado(a)</option>
-                                <option value="Viudo(a)">Viudo(a)</option>
-                                <option value="Divorciado(a)">Divorciado(a)</option>
-                                <option value="Unión libre">Unión libre</option>
+                                <option th:each="status : ${maritalStatus}" th:value="${status}" th:text="${status}" />
                             </select>
                             <span th:if="${#fields.hasErrors('maritalStatus')}" th:errors="*{maritalStatus}"></span>
                         </div>
@@ -306,17 +298,7 @@
                         <label>Carrera</label>
                         <select id="career" name="career" required th:field="*{career}" class="ui dropdown">
                             <option value="" selected>Selecione...</option>
-                            <option value="Ingeniería en Desarrollo y Gestión de Software">Ingeniería en Desarrollo y
-                                Gestión de Software
-                            </option>
-                            <option value="Ingeniería en Diseño Textil y Modas">Ingeniería en Diseño Textil y Modas
-                            </option>
-                            <option value="Licenciatura en Diseño Digital y Producción Audiovisual">Licenciatura en
-                                Diseño Digital y Producción Audiovisual
-                            </option>
-                            <option value="Ingeniería en Redes Inteligentes y Ciberseguridad">Ingeniería en Redes
-                                Inteligentes y Ciberseguridad
-                            </option>
+                            <option th:each="carrer : ${carrers}" th:value="${carrer}" th:text="${carrer}" />
                         </select>
                         <span th:if="${#fields.hasErrors('career')}" th:errors="*{career}"></span>
 

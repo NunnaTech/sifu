@@ -8,13 +8,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.tags.BindErrorsTag;
+import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
+import javax.validation.Path.Node;
 
 @Controller
 @RequestMapping("/")
@@ -24,25 +30,28 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
+    @Autowired
+    private StudentValidators validators;
+
+    private int currentPage = 1;
+    private int pageSize = 15;
+
     @GetMapping("/")
     public String index(Model model, Student student) {
+        model.addAttribute("genders",validators.getGenders());
+        model.addAttribute("regions",validators.getRegions());
+        model.addAttribute("maritalStatus",validators.getMaritalStatus());
+        model.addAttribute("carrers",validators.getCareers());
         return "index";
     }
-
-    // @GetMapping("/view")
-    // public String view(Model model) {
-    //     List<Student> students = studentService.getAll();
-    //     model.addAttribute("students", students);
-    //     return "view";
-    // }
 
     @GetMapping("/view")
     public String listStudent(
       Model model, 
       @RequestParam("page") Optional<Integer> page, 
       @RequestParam("size") Optional<Integer> size) {
-        int currentPage = page.orElse(1);
-        int pageSize = size.orElse(15);
+        int currentPage = page.orElse(this.currentPage);
+        int pageSize = size.orElse(this.pageSize);
 
         Page<Student> studentPage = studentService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
 
@@ -62,11 +71,30 @@ public class StudentController {
 
 
     @PostMapping("/save")
-    public String save(@Valid Student student, BindingResult result) {
+    public String save(Model model,@Valid Student student, BindingResult result) {
+        log.info(student.toString());  
         if (result.hasErrors()) {
             return "index";
         }
-        studentService.save(student);
+        try {
+            studentService.save(student);
+        } catch (ConstraintViolationException e) {
+            List<String> fields = new ArrayList<>();
+            ConstraintViolation<?> violation = e.getConstraintViolations().iterator().next();
+            for (Node a :violation.getPropertyPath()){
+                System.out.println(a);
+                fields.add(a.getName());
+            }
+
+            for (String field : fields) {
+                result.rejectValue(field, "messageCode", "Valor no válido");
+            }
+            model.addAttribute("genders",validators.getGenders());
+            model.addAttribute("regions",validators.getRegions());
+            model.addAttribute("maritalStatus",validators.getMaritalStatus());
+            model.addAttribute("carrers",validators.getCareers());
+            return "index";
+        }
         return "redirect:/view";
     }
 

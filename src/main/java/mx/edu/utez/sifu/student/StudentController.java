@@ -38,10 +38,7 @@ public class StudentController {
 
     @GetMapping("/")
     public String index(Model model, Student student) {
-        model.addAttribute("genders",validators.getGenders());
-        model.addAttribute("regions",validators.getRegions());
-        model.addAttribute("maritalStatus",validators.getMaritalStatus());
-        model.addAttribute("carrers",validators.getCareers());
+        model = fillSelects(model);
         return "index";
     }
 
@@ -72,7 +69,6 @@ public class StudentController {
 
     @PostMapping("/save")
     public String save(Model model,@Valid Student student, BindingResult result) {
-        log.info(student.toString());  
         if (result.hasErrors()) {
             return "index";
         }
@@ -81,18 +77,15 @@ public class StudentController {
         } catch (ConstraintViolationException e) {
             List<String> fields = new ArrayList<>();
             ConstraintViolation<?> violation = e.getConstraintViolations().iterator().next();
-            for (Node a :violation.getPropertyPath()){
-                System.out.println(a);
+        
+            for (Node a :violation.getPropertyPath())
                 fields.add(a.getName());
-            }
-
-            for (String field : fields) {
+        
+            for (String field : fields) 
                 result.rejectValue(field, "messageCode", "Valor no válido");
-            }
-            model.addAttribute("genders",validators.getGenders());
-            model.addAttribute("regions",validators.getRegions());
-            model.addAttribute("maritalStatus",validators.getMaritalStatus());
-            model.addAttribute("carrers",validators.getCareers());
+
+            model = fillSelects(model);
+
             return "index";
         }
         return "redirect:/view";
@@ -102,5 +95,13 @@ public class StudentController {
     public String delete(@PathVariable("id") Integer id) {
         studentService.delete(id);
         return "redirect:/view";
+    }
+
+    private Model fillSelects(Model model){
+        model.addAttribute("genders",validators.getGenders());
+        model.addAttribute("regions",validators.getRegions());
+        model.addAttribute("maritalStatus",validators.getMaritalStatus());
+        model.addAttribute("carrers",validators.getCareers());
+        return model;
     }
 }

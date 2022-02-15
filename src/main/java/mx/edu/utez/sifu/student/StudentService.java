@@ -54,22 +54,10 @@ public class StudentService {
     }
 
     public Student save(Student entity) {
-        // check if the entity are fine 
-
-        // gender
-        entity.setGender(validators.gender(entity.getGender()));
-
-        // region
-        entity.setRegion(validators.Region(entity.getRegion()));
-
-        // marital Status
-        entity.setMaritalStatus(validators.maritalStatus(entity.getMaritalStatus()));
-
-        // Carrer
-        entity.setCareer(validators.career(entity.getCareer()));
-
-        return userRepository.save(entity);
-    }
+            entity = validate(entity);
+            return userRepository.save(entity);        
+ 
+          }
 
     public Optional<Student> update(Student entity) {
         Optional<Student> updatedEntity = Optional.empty();
@@ -110,5 +98,25 @@ public class StudentService {
         return entity;
     }
 
+    public Student validate(Student student){
+        // check if the entity are fine 
 
+        // gender
+        student.setGender(validators.gender(student.getGender()));
+
+        // region
+        student.setRegion(validators.Region(student.getRegion()));
+
+        // marital Status
+        student.setMaritalStatus(validators.maritalStatus(student.getMaritalStatus()));
+
+        // Carrer
+        student.setCareer(validators.career(student.getCareer()));
+
+        // birtdate
+        student.setBirthday(validators.birthdate(student.getBirthday(), student.getAge()));
+
+        //
+        return student;
+    }
 }

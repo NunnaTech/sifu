@@ -1,9 +1,30 @@
 package mx.edu.utez.sifu.student;
 
+import java.lang.reflect.Array;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Year;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import lombok.extern.slf4j.Slf4j;
+import mx.edu.utez.sifu.service.Data;
 
 @Service
+@Slf4j
 public class StudentValidators {
+
+    private String url = "https://api.valida-curp.com.mx/curp/obtener_datos/?token=pruebas&curp=";
+
+    @Autowired
+    private UserRepository repository;
+
     private String[] genders = { "Masculino", "Femenino" };
     private String[] regions = { "México", "Estados Unidos", "Canadá", "Guatemala" };
     private String[] maritalStatus = { "Soltero(a)", "Casado(a)", "Viudo(a)", "Divorciado(a)", "Unión Libre" };
@@ -57,4 +78,36 @@ public class StudentValidators {
         }
         return "";
     }
+
+    public List<Object> curp(String curpRequest){
+
+        if (!repository.findByCurp(curpRequest).isEmpty()) return null;
+        
+        String url = this.url + curpRequest;
+
+        RestTemplate restTemplate = new RestTemplate();
+        Data curpData = restTemplate.getForObject(url, Data.class);
+        log.info(curpData.toString());
+        return Arrays.asList(curpData);      
+    }
+
+    public String birthdate(String birthdateRequest, Integer age){
+        try {
+            LocalDate now = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        
+            LocalDate birthdate = LocalDate.parse(birthdateRequest, formatter);
+            // check
+            int years = (int) ChronoUnit.YEARS.between(now,birthdate);
+    
+            if(Math.abs(years) == age){
+                return birthdateRequest;
+            }
+            return "";
+             
+        } catch (Exception e) {
+            throw new RuntimeException("Bad.");
+            
+        }
+       }
 }

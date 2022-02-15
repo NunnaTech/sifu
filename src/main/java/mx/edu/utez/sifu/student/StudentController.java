@@ -80,8 +80,13 @@ public class StudentController {
             for (Node a :violation.getPropertyPath())
                 fields.add(a.getName());
         
-            for (String field : fields) 
+            for (String field : fields){
+                if(field.equals("birthday")){
+                    result.rejectValue(field, "messageCode", "La fecha de nacimiento y edad no coinciden");
+                    continue;
+                }
                 result.rejectValue(field, "messageCode", "Valor no válido");
+            }
 
 
 

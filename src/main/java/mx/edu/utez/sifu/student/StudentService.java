@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.lang.reflect.Field;
+
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -22,7 +22,7 @@ public class StudentService {
 
     @Autowired
     private StudentValidators validators;
-    
+
 
     public List<Student> getAll() {
         return (List<Student>) userRepository.findAll();
@@ -31,7 +31,7 @@ public class StudentService {
     // Pagination
     public Page<Student> findPaginated(Pageable pageable) {
         List<Student> students = (List<Student>) userRepository.findAll();
-        
+
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
@@ -45,7 +45,7 @@ public class StudentService {
         }
 
         Page<Student> studentPage
-          = new PageImpl<Student>(list, PageRequest.of(currentPage, pageSize), students.size());
+                = new PageImpl<Student>(list, PageRequest.of(currentPage, pageSize), students.size());
 
         return studentPage;
     }
@@ -56,10 +56,10 @@ public class StudentService {
     }
 
     public Student save(Student entity) {
-            entity = validate(entity);
-            return userRepository.save(entity);        
- 
-          }
+        entity = validate(entity);
+        return userRepository.save(entity);
+
+    }
 
     public Optional<Student> update(Student entity) {
         Optional<Student> updatedEntity = Optional.empty();
@@ -94,30 +94,24 @@ public class StudentService {
 
     public Optional<Student> delete(int id) {
         Optional<Student> entity = getById(id);
-        if(entity.isPresent()){
+        if (entity.isPresent()) {
             userRepository.delete(entity.get());
         }
         return entity;
     }
 
-    public Student validate(Student student){
-        // check if the entity are fine 
-
+    public Student validate(Student student) {
+        // check if the entity are fine
         // gender
         student.setGender(validators.gender(student.getGender()));
-
         // region
         student.setRegion(validators.Region(student.getRegion()));
-
         // marital Status
         student.setMaritalStatus(validators.maritalStatus(student.getMaritalStatus()));
-
         // Carrer
         student.setCareer(validators.career(student.getCareer()));
-
         // birtdate
         student.setBirthday(validators.birthdate(student.getBirthday(), student.getAge()));
-
         // curp
         student.setCurp(validators.curp(student.getCurp()));
         return student;

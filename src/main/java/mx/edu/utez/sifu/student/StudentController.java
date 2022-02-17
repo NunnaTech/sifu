@@ -47,20 +47,15 @@ public class StudentController {
       @RequestParam("size") Optional<Integer> size) {
         int currentPage = page.orElse(this.currentPage);
         int pageSize = size.orElse(this.pageSize);
-
         Page<Student> studentPage = studentService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
-
         model.addAttribute("studentPage", studentPage);
-
         int totalPages = studentPage.getTotalPages();
-        
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
                 .boxed()
                 .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
-
         return "view";
     }
 
@@ -76,20 +71,19 @@ public class StudentController {
         } catch (ConstraintViolationException e) {
             List<String> fields = new ArrayList<>();
             ConstraintViolation<?> violation = e.getConstraintViolations().iterator().next();
-        
             for (Node a :violation.getPropertyPath())
                 fields.add(a.getName());
-        
             for (String field : fields){
                 if(field.equals("birthday")){
                     result.rejectValue(field, "messageCode", "La fecha de nacimiento y edad no coinciden");
                     continue;
                 }
+                if(field.equals("curp")){
+                    result.rejectValue(field, "messageCode", "La CURP ya se encuentra registrada");
+                    continue;
+                }
                 result.rejectValue(field, "messageCode", "Valor no válido");
             }
-
-
-
             return "index";
         }
         return "redirect:/view";

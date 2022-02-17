@@ -5,11 +5,10 @@ const EMAIL = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._
 const TEXT = '0123456789áéíóúÁÉÍÓÚabcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ.,;()\'\'- #/';
 const DECIMALS = '0123456789.';
 const DATES = '0123456789-';
-let API_KEY = 'https://api.valida-curp.com.mx/curp/obtener_datos/?token=pruebas&curp='
+let API_KEY = 'https://api.valida-curp.com.mx/curp/obtener_datos/?token=840a5bb7-2b3f-4c00-8c50-57c71de068ba&curp='
+let counter = 0;
 
 setInputs();
-
-let counter = 0;
 
 function setInputs() {
     let attribute = ['onkeyup', 'onkeypress', 'onkeydown'];
@@ -71,7 +70,6 @@ function validateCURP(value) {
         })
         .catch(err => console.error(err))
 }
-
 
 function fillInputs({response}) {
     const {Solicitante: {ApellidoMaterno, ApellidoPaterno, Nombres, FechaNacimiento, ClaveSexo, Nacionalidad}} = response

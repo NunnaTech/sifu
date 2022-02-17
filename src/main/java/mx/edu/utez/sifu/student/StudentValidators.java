@@ -1,20 +1,17 @@
 package mx.edu.utez.sifu.student;
 
-import java.lang.reflect.Array;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Year;
+import java.time.LocalDate; 
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.extern.slf4j.Slf4j;
-import mx.edu.utez.sifu.service.Data;
+import mx.edu.utez.sifu.curp.Result;
+import mx.edu.utez.sifu.curp.Solicitante;
 
 @Service
 @Slf4j
@@ -79,18 +76,6 @@ public class StudentValidators {
         return "";
     }
 
-    public List<Object> curp(String curpRequest){
-
-        if (!repository.findByCurp(curpRequest).isEmpty()) return null;
-        
-        String url = this.url + curpRequest;
-
-        RestTemplate restTemplate = new RestTemplate();
-        Data curpData = restTemplate.getForObject(url, Data.class);
-        log.info(curpData.toString());
-        return Arrays.asList(curpData);      
-    }
-
     public String birthdate(String birthdateRequest, Integer age){
         try {
             LocalDate now = LocalDate.now();
@@ -106,8 +91,14 @@ public class StudentValidators {
             return "";
              
         } catch (Exception e) {
-            throw new RuntimeException("Bad.");
+            return "";
             
         }
-       }
+    }
+
+    public String curp(String curpRequest){
+        return "";
+        
+    }
+
 }

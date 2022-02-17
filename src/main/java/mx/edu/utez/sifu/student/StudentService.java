@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.lang.reflect.Field;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -21,6 +22,7 @@ public class StudentService {
 
     @Autowired
     private StudentValidators validators;
+    
 
     public List<Student> getAll() {
         return (List<Student>) userRepository.findAll();
@@ -116,7 +118,8 @@ public class StudentService {
         // birtdate
         student.setBirthday(validators.birthdate(student.getBirthday(), student.getAge()));
 
-        //
+        // curp
+        student.setCurp(validators.curp(student.getCurp()));
         return student;
     }
 }

@@ -5,7 +5,7 @@
 [![MIT License][license-shield]][license-url]
 
 <h1 align="center">
-  <a href="https://github.com/ThePandaDevs/sifu"><img src="https://avatars.githubusercontent.com/u/92613716?s=400&u=0e1b9e4a516a34e9ce87d6b2da77e8a2017b694c&v=4" alt="SIFU" width="200"></a>
+  <a href="https://github.com/ThePandaDevs/sifu"><img src="./src/main/resources/static/img/Logo.png" alt="SIFU" width="200"></a>
 <br/>
   SIFU
 </h1>
@@ -19,7 +19,7 @@
   <a href="#">License</a>
 </p>
 
-![screenshot](https://s3.aws-k8s.generated.photos/ai-generated-photos/upscaler-uploads/822/63bb7d71-19c0-458b-b722-176a4f682ed8.png)
+![screenshot](./src/main/resources/static/img/Cover.png)
 
 ## Features
 
